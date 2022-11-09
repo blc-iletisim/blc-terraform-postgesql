@@ -1,0 +1,10 @@
+{
+    "user_name" : "mertcan",
+    "tenant_name" : "admin",
+    "password" : "1",
+    "image_id" : "20944105-1877-4935-bacd-d68dc3691ade",
+    "flavor_id" : "a1ee6670-64f7-412d-a075-c4a8ff923777",
+    "key_pair" : "blc-cloud"
+
+
+}
