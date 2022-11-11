@@ -35,8 +35,8 @@ resource "openstack_networking_port_v2" "port_1" {
     network_id = "f0ad3870-01d3-41e1-b6dd-dccf6f424de4"
 }
 
-resource "openstack_compute_instance_v2" "mert" {
-    name            = "mert"
+resource "openstack_compute_instance_v2" "postgresql" {
+    name            = "postgresql"
     image_id        = local.local_data.image_id
     flavor_id       = local.local_data.flavor_id
     key_pair        = local.local_data.key_pair
@@ -56,7 +56,7 @@ output "pool" {
 
 resource "openstack_compute_floatingip_associate_v2" "admin" {
   floating_ip = "${openstack_networking_floatingip_v2.admin.address}"
-  instance_id = "${openstack_compute_instance_v2.mert.id}"
+  instance_id = "${openstack_compute_instance_v2.postgresql.id}"
 /*
   connection {
         type = "ssh"
