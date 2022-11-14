@@ -14,7 +14,7 @@ required_version = ">= 0.14.0"
 
 #vars.json file
 locals {
-  local_data = jsondecode(file("${path.module}/var.json"))
+  local_data = jsondecode(file("${path.module}/vars.json"))
 }
 
 
