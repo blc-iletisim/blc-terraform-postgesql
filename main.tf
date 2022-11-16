@@ -57,23 +57,6 @@ output "pool" {
 resource "openstack_compute_floatingip_associate_v2" "admin" {
   floating_ip = "${openstack_networking_floatingip_v2.admin.address}"
   instance_id = "${openstack_compute_instance_v2.postgresql.id}"
-/*
-  connection {
-        type = "ssh"
-        agent = false
-        user = "ubuntu"
-        private_key = "${file("/home/ubuntu/deploy-openstack/ssh-terra/blc-cloud.pem")}"
-        host = "${openstack_networking_floatingip_v2.admin.address}"
-        //host = "${openstack_networking_port_v2.port_1.id}"
-    }
-    
-    provisioner "remote-exec" {
-        inline = [
-            "sudo apt update -y",
-            "sudo apt install apache2 -y",
-        ]
-    }
-*/
 }
 
 
@@ -83,12 +66,14 @@ resource "null_resource" "remote-exec" {
       type ="ssh"
       agent = false
       user = "ubuntu"
-      private_key = "${file("${path.module}//blc-cloud.pem")}"
+      private_key = "${file("${path.module}/blc-cloud.pem")}"
       host = "${openstack_networking_floatingip_v2.admin.address}"
     }
     inline = [      
       "sudo apt-get update -y",
       "sudo apt install postgresql postgresql-contrib",
+      "sudo apt-get update -y",
+      "sudo apt install docker.io -y",
       "sudo apt install docker-compose -y",
       "sudo git clone https://github.com/blc-iletisim/blc-postgresql-gui-docker.git",
       "cd blc-postgresql-gui-docker/",
