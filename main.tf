@@ -71,7 +71,7 @@ resource "null_resource" "remote-exec" {
     }
     inline = [      
       "sudo apt-get update -y",
-      "sudo apt install postgresql postgresql-contrib",
+      "sudo apt install postgresql postgresql-contrib -y",
       "sudo apt-get update -y",
       "sudo apt install docker.io -y",
       "sudo apt install docker-compose -y",
