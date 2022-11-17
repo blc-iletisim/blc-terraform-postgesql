@@ -66,12 +66,12 @@ resource "null_resource" "remote-exec" {
       type ="ssh"
       agent = false
       user = "ubuntu"
-      private_key = "${file("${path.module}/blc-cloud.pem")}"
+      private_key = "${file(local.local_data.pem)}"
       host = "${openstack_networking_floatingip_v2.admin.address}"
     }
     inline = [      
       "sudo apt-get update -y",
-      "sudo apt install postgresql postgresql-contrib",
+      "sudo apt install postgresql postgresql-contrib -y",
       "sudo apt-get update -y",
       "sudo apt install docker.io -y",
       "sudo apt install docker-compose -y",
